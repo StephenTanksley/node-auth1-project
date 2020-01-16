@@ -10,11 +10,11 @@ const authorized = (password) => async (req, res, next) => {
         return res.status(401).json(authError)
     }
 
-
-
     const passwordValid = await bcrypt.compare(password, user.password)
     if(!passwordValid) {
         return res.status(401).json
     }
 
 }
+
+module.exports = authorized
