@@ -1,16 +1,32 @@
+const bcrypt = require('bcryptjs')
 const db = require('../data/db-config')
 
-const get = async () => {
-    const user = await db('users')
-    return user
+const add = async (user) => {
+    user.password = await bcrypt.hash(user.password, 15)
+    const [id] = await db('users').insert(user)
+    return findById(id)
 }
 
-const getById = async (id) => {
-    const [user] = await db('users').where({ id }).first()
-    return user
+const find = async () => {
+    return db('users')
+        .select('id', 'username')
+}
+
+const findBy = async (filter) => {
+    return db('users')
+        .where(filter)
+        .select('id', 'username', 'password')
+}
+
+const findById = (id) => {
+    return db('users')
+        .where({ id })
+        .first('id', 'username')
 }
 
 module.exports = {
-    get, 
-    getById
+    add,
+    find, 
+    findBy,
+    findById,
 }
