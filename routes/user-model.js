@@ -7,12 +7,12 @@ const add = async (user) => {
     return findById(id)
 }
 
-const find = async () => {
+const find = () => {
     return db('users')
         .select('id', 'username')
 }
 
-const findBy = async (filter) => {
+const findBy = (filter) => {
     return db('users')
         .where(filter)
         .select('id', 'username', 'password')

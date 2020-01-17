@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/StephenTanksley/node-auth1-project#readme",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
+    "helmet": "^3.21.2",
     "nodemon": "^2.0.2"
   }
 }
