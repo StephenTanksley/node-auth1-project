@@ -30,4 +30,18 @@ const auth = () => async (req, res, next) => {
     }
 }
 
-module.exports = auth
+const protected = () => {
+    return (req, res, next) => {
+        if(!req.session || !req.session.user) {
+            return res
+                .status(401)
+                .json({ message: "Invalid credentials."})
+        }
+        next()
+    }
+}
+
+module.exports = {
+    auth,
+    protected
+}
